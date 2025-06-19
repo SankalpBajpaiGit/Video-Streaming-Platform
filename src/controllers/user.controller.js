@@ -83,8 +83,9 @@ const registerUser = asyncHandler( async (req, res) => {
 
 const loginUser = asyncHandler(async (req, res) => {
     const {email, username, password} = req.body
+    console.log(email);
 
-    if(!username || !email){
+    if(!username && !email){
         throw new ApiError(400, "username or password is required")
     }
 
@@ -126,7 +127,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 })
 
-const logoutUser = asyncHandler(async(res, req) => {
+const logoutUser = asyncHandler(async(req, res) => {
     await User.findByIdAndUpdate(
         req.user._id,
         {
